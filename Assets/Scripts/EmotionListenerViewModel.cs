@@ -60,7 +60,7 @@ public class EmotionListenerViewModel : ImageResultsListener {
 			faces[0].Emotions.TryGetValue (Emotions.Joy, out currentSmile);
 			faces[0].Emotions.TryGetValue (Emotions.Sadness, out currentSadness);
 			faces[0].Emotions.TryGetValue (Emotions.Surprise, out currentSuprise);
-			faces[0].Emotions.TryGetValue (Emotions.Anger, out currentAnger);
+			faces[0].Emotions.TryGetValue (Emotions.Disgust, out currentAnger);
 
 			if (currentSmile > currStrongestEmo) {
 				currStrongestEmo = currentSmile;
@@ -70,7 +70,7 @@ public class EmotionListenerViewModel : ImageResultsListener {
 			}
 			if (currentAnger > currStrongestEmo) {
 				currStrongestEmo = currentAnger;
-				currStrongestEmoStr = "Anger";
+				currStrongestEmoStr = "Disgust";
 				ctrlDelegate = OnEastEmo;
 				strongestText = EastEmoText;
 			}

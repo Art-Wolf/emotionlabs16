@@ -37,3 +37,11 @@ public class GoSouthEvent : GameEvent {
 		this.someVar = someVar;
 	}
 }
+
+public class GameOverEvent : GameEvent {
+	public string someVar { get; private set; }
+
+	public GameOverEvent(string someVar){
+		this.someVar = someVar;
+	}
+}
