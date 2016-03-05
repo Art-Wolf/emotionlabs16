@@ -13,3 +13,27 @@ public class GoWestEvent : GameEvent {
 		this.someVar = someVar;
 	}
 }
+
+public class GoNorthEvent : GameEvent {
+	public string someVar { get; private set; }
+
+	public GoNorthEvent(string someVar){
+		this.someVar = someVar;
+	}
+}
+
+public class GoEastEvent : GameEvent {
+	public string someVar { get; private set; }
+
+	public GoEastEvent(string someVar){
+		this.someVar = someVar;
+	}
+}
+
+public class GoSouthEvent : GameEvent {
+	public string someVar { get; private set; }
+
+	public GoSouthEvent(string someVar){
+		this.someVar = someVar;
+	}
+}
