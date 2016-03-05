@@ -73,11 +73,11 @@ public class EmotionListenerViewModel : ImageResultsListener {
 			}
 
 			this.strongestEmo.text = "Custom Strongest Emotion: " + strongestEmoNav.name + "/" + strongestEmoNav.valence;
-			HighlightAndEvent (strongestEmoNav.direction);
+			HighlightAndEvent (strongestEmoNav.direction, strongestEmoNav.name);
 		}
 	}
 
-	public void HighlightAndEvent(string direction) {
+	public void HighlightAndEvent(string direction, string emotion) {
 		NorthEmoText.color = Color.black;
 		EastEmoText.color = Color.black;
 		SouthEmoText.color = Color.black;
@@ -86,19 +86,19 @@ public class EmotionListenerViewModel : ImageResultsListener {
 		switch(direction) {
 		case "North":
 			NorthEmoText.color = Color.green;
-			OnNorthEmo();
+			OnNorthEmo(emotion);
 			break;
 		case "East":
 			EastEmoText.color = Color.green;
-			OnEastEmo();
+			OnEastEmo(emotion);
 			break;
 		case "South":
 			SouthEmoText.color = Color.green;
-			OnSouthEmo();
+			OnSouthEmo(emotion);
 			break;
 		case "West":
 			WestEmoText.color = Color.green;
-			OnWestEmo();
+			OnWestEmo(emotion);
 			break;
 		default:
 			break;
@@ -148,24 +148,24 @@ public class EmotionListenerViewModel : ImageResultsListener {
 		Debug.Log(nextNavArray [0] + "/" + nextNavArray [1] + "/" + nextNavArray [2] + "/" + nextNavArray [3]);
 	}
 
-	public void OnNorthEmo() {
+	public void OnNorthEmo(string emotion) {
 		Debug.Log("North Emo");
-		EventController.Instance.Publish (new GoNorthEvent("random"));
+		EventController.Instance.Publish (new GoNorthEvent(emotion));
 	}
 
-	public void OnWestEmo() {
+	public void OnWestEmo(string emotion) {
 		Debug.Log("West Emo");
-		EventController.Instance.Publish (new GoWestEvent("random"));
+		EventController.Instance.Publish (new GoWestEvent(emotion));
 	}
 
-	public void OnEastEmo() {
+	public void OnEastEmo(string emotion) {
 		Debug.Log("East Emo");
-		EventController.Instance.Publish (new GoEastEvent("random"));
+		EventController.Instance.Publish (new GoEastEvent(emotion));
 	}
 
-	public void OnSouthEmo() {
+	public void OnSouthEmo(string emotion) {
 		Debug.Log("South Emo");
-		EventController.Instance.Publish (new GoSouthEvent("random"));
+		EventController.Instance.Publish (new GoSouthEvent(emotion));
 	}
 
 	public class EmoNav {
