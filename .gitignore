@@ -8,6 +8,9 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 UnityGenerated/
+Assets/Affdex/
+Assets/StreamingAssets/
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
@@ -34,6 +37,7 @@ UnityGenerated/
 .Trashes
 ehthumbs.db
 [Tt]humbs.db
+*.app/
 # ============ #
 # Unity3D Generated File On Crash Reports
 # ============ #
