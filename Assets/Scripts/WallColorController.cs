@@ -11,11 +11,38 @@ public class WallColorController : MonoBehaviour
 	public Material happyMaterial;
 	public Material surpriseMaterial;
 
+	private float startingMetalic = 0.6f;
+	private float endingMetalic = 0.2f;
+	private float currentMetalic = 0.58f;
+
+	private bool decreasing = true;
+
 	void Start()
 	{
 		if (wallTops == null) {
 			wallTops = GameObject.FindGameObjectsWithTag ("top");
 		}
+	}
+
+	void FixedUpdate() 
+	{
+		if (decreasing) {
+			if (currentMetalic > endingMetalic)
+				currentMetalic -= 0.01f;
+			else {
+				decreasing = false;
+				currentMetalic += 0.01f;
+			}
+		} else {
+			if (currentMetalic < startingMetalic)
+				currentMetalic += 0.01f;
+			else {
+				decreasing = true;
+				currentMetalic -= 0.01f;
+			}
+		}
+
+		sadMaterial.SetVector("_Color", new Vector4(currentMetalic, 0, 0, 0));
 	}
 
 	void Awake()

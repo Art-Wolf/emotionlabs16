@@ -37,6 +37,7 @@ Assets/StreamingAssets/
 .Trashes
 ehthumbs.db
 [Tt]humbs.db
+*.app/
 # ============ #
 # Unity3D Generated File On Crash Reports
 # ============ #
