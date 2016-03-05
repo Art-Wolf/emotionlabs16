@@ -7,33 +7,41 @@ public class GameEvent
 }
 
 public class GoWestEvent : GameEvent {
-	public string someVar { get; private set; }
+	public string emotion { get; private set; }
 
-	public GoWestEvent(string someVar){
-		this.someVar = someVar;
+	public GoWestEvent(string emotion){
+		this.emotion = emotion;
 	}
 }
 
 public class GoNorthEvent : GameEvent {
-	public string someVar { get; private set; }
+	public string emotion { get; private set; }
 
-	public GoNorthEvent(string someVar){
-		this.someVar = someVar;
+	public GoNorthEvent(string emotion){
+		this.emotion = emotion;
 	}
 }
 
 public class GoEastEvent : GameEvent {
-	public string someVar { get; private set; }
+	public string emotion { get; private set; }
 
-	public GoEastEvent(string someVar){
-		this.someVar = someVar;
+	public GoEastEvent(string emotion){
+		this.emotion = emotion;
 	}
 }
 
 public class GoSouthEvent : GameEvent {
+	public string emotion { get; private set; }
+
+	public GoSouthEvent(string emotion){
+		this.emotion = emotion;
+	}
+}
+
+public class GameOverEvent : GameEvent {
 	public string someVar { get; private set; }
 
-	public GoSouthEvent(string someVar){
+	public GameOverEvent(string someVar){
 		this.someVar = someVar;
 	}
 }
