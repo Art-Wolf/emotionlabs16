@@ -11,38 +11,64 @@ public class WallColorController : MonoBehaviour
 	public Material happyMaterial;
 	public Material surpriseMaterial;
 
-	private float startingMetalic = 0.6f;
-	private float endingMetalic = 0.2f;
-	private float currentMetalic = 0.58f;
+	private float startingMetalic = 10f;
+	private float endingMetalic = 5f;
+	private float currentMetalic = 0f;
 
 	private bool decreasing = true;
+
+	private float currentMat = 1;
 
 	void Start()
 	{
 		if (wallTops == null) {
 			wallTops = GameObject.FindGameObjectsWithTag ("top");
 		}
+
+		//InvokeRepeating("changeWallColors", 1f, 1f);
 	}
 
-	void FixedUpdate() 
+	/** Don't call.. **/
+	void changeWallColors() 
 	{
 		if (decreasing) {
 			if (currentMetalic > endingMetalic)
-				currentMetalic -= 0.01f;
+				currentMetalic -= 1f;
 			else {
 				decreasing = false;
-				currentMetalic += 0.01f;
+				currentMetalic += 1f;
 			}
 		} else {
 			if (currentMetalic < startingMetalic)
-				currentMetalic += 0.01f;
+				currentMetalic += 1f;
 			else {
 				decreasing = true;
-				currentMetalic -= 0.01f;
+				currentMetalic -= 1f;
 			}
 		}
 
-		sadMaterial.SetVector("_Color", new Vector4(currentMetalic, 0, 0, 0));
+		sadMaterial.SetVector("_Color", new Vector4(0f, 0f, 1f , 1f ));
+		angryMaterial.SetVector("_Color", new Vector4(1f, 0f, 0f, 1f));
+		happyMaterial.SetVector("_Color", new Vector4(0f, 1f, 0f, 1f));
+		surpriseMaterial.SetVector("_Color", new Vector4(1f, 0.92f, 1f, 1f));
+
+		foreach (GameObject top in wallTops) {
+			topRender = top.GetComponentsInChildren<Renderer>();
+			foreach (Renderer rend in topRender) 
+			{
+				if (currentMat == 1) {
+					rend.material.Lerp (rend.material, surpriseMaterial, 0.5f);
+				} else if (currentMat == 2) {
+					rend.material.Lerp (rend.material, angryMaterial, 0.5f);
+				} else if (currentMat == 3) {
+					rend.material.Lerp (rend.material, happyMaterial, 0.5f);
+				} else {
+					rend.material.Lerp (rend.material, sadMaterial, 0.5f);
+				}
+					
+			}
+		}
+
 	}
 
 	void Awake()
@@ -54,6 +80,7 @@ public class WallColorController : MonoBehaviour
 	}
 
 	void GoWest(GoWestEvent eventTest) {
+		currentMat = 1;
 		foreach (GameObject top in wallTops) {
 			topRender = top.GetComponentsInChildren<Renderer>();
 			foreach (Renderer rend in topRender) 
@@ -64,6 +91,7 @@ public class WallColorController : MonoBehaviour
 	}
 
 	void GoEast(GoEastEvent eventTest) {
+		currentMat = 2;
 		foreach (GameObject top in wallTops) {
 			topRender = top.GetComponentsInChildren<Renderer>();
 			foreach (Renderer rend in topRender) 
@@ -74,6 +102,7 @@ public class WallColorController : MonoBehaviour
 	}
 
 	void GoNorth(GoNorthEvent eventTest) {
+		currentMat = 3;
 		foreach (GameObject top in wallTops) {
 			topRender = top.GetComponentsInChildren<Renderer>();
 			foreach (Renderer rend in topRender) 
@@ -84,7 +113,7 @@ public class WallColorController : MonoBehaviour
 	}
 
 	void GoSouth(GoSouthEvent eventTest) {
-
+		currentMat = 4;
 		foreach (GameObject top in wallTops) {
 			topRender = top.GetComponentsInChildren<Renderer>();
 			foreach (Renderer rend in topRender) 
@@ -93,6 +122,4 @@ public class WallColorController : MonoBehaviour
 			}
 		}
 	}
-
-
 }
