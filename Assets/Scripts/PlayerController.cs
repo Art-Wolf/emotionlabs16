@@ -72,10 +72,11 @@ public class PlayerController : MonoBehaviour
 	{
 		if(other.gameObject.tag == "PickUp")
 		{
+			GetComponent<Rigidbody> ().mass = 0.1f;
 			other.gameObject.SetActive(false);
 			count = count + 1;
 			SetCountText();
-		}
+		} 
 	}
 	
 	void SetCountText ()

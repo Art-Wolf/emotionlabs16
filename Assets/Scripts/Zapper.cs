@@ -5,13 +5,14 @@ using System.IO;
 
 public class Zapper : MonoBehaviour {
 
-	public GUIText zapped;
+	public AudioClip buzzAudio;
 
-	void Start () {
+	void OnCollisionEnter(Collision collisionInfo)
+	{
+		Debug.Log("Detected collision between " + gameObject.name + " and " + collisionInfo.collider.name);
 
 		TextAsset zapperConfig = Resources.Load("config") as TextAsset;
 		string url = zapperConfig.text;
-		zapped.text = url;
 		WWWForm form = new WWWForm ();
 		form.AddField ("fake", "xy");
 
@@ -19,15 +20,17 @@ public class Zapper : MonoBehaviour {
 
 		StartCoroutine (WaitForRequest (www));
 	}
-
+		
 	IEnumerator WaitForRequest(WWW www)
 	{
 		yield return www;
 
 		if (www.error == null) {
-			zapped.text = "GOTCHA";
+			AudioSource audio = GetComponent<AudioSource>();
+			audio.clip = buzzAudio;
+			audio.Play ();
 		} else {
-			zapped.text = www.error;
+			Debug.Log("IFTTT error: " + www.error);
 		}
 	}
 }
