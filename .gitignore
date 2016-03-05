@@ -8,6 +8,9 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 UnityGenerated/
+Assets/Affdex/
+Assets/StreamingAssets/
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
