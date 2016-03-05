@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 	private int count;
 	private int numberOfGameObjects;
 
+
 	void Awake()
 	{
 		EventController.Instance.Subscribe<GoWestEvent> (GoWest);

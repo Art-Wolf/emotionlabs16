@@ -11,6 +11,13 @@ public class WallColorController : MonoBehaviour
 	public Material happyMaterial;
 	public Material surpriseMaterial;
 
+
+	public AudioClip happyAudio;
+	public AudioClip sadAudio;
+	public AudioClip angryAudio;
+	public AudioClip surpriseAudio;
+	public AudioClip applauseAudio;
+
 	private float startingMetalic = 10f;
 	private float endingMetalic = 5f;
 	private float currentMetalic = 0f;
@@ -18,6 +25,8 @@ public class WallColorController : MonoBehaviour
 	private bool decreasing = true;
 
 	private float currentMat = 1;
+
+	private string currentEmotion = "";
 
 	void Start()
 	{
@@ -85,14 +94,41 @@ public class WallColorController : MonoBehaviour
 		EventController.Instance.UnSubscribe<GoEastEvent>(GoEast);
 		EventController.Instance.UnSubscribe<GoNorthEvent>(GoNorth);
 		EventController.Instance.UnSubscribe<GoSouthEvent>(GoSouth);
+		setMusic ("GameOver");
+	}
+
+	void setMusic(string emotion) {
+		if (!currentEmotion.Equals(emotion)) {
+			AudioSource audio = GetComponent<AudioSource>();
+			if (emotion.Equals ("Joy")) {
+				audio.clip = happyAudio;
+			} else if (emotion.Equals ("Sadness")) {
+				audio.clip = sadAudio;
+			} else if (emotion.Equals ("Disgust")) {
+				audio.clip = angryAudio;
+			} else if (emotion.Equals ("Surprise")) {
+				audio.clip = surpriseAudio;
+			} else if (emotion.Equals ("GameOver")) {
+				audio.clip = applauseAudio;
+			}
+
+			audio.Play();
+			currentEmotion = emotion;
+		}
 	}
 
 	Material getColor(string emotion) {
-		Debug.Log ("Emotion: " + emotion);
-		if (emotion.Equals("Joy")) return happyMaterial;
-		else if (emotion.Equals("Sadness")) return sadMaterial;
-		else if (emotion.Equals("Disgust")) return angryMaterial;
-		else return surpriseMaterial;
+		setMusic (emotion);
+		if (emotion.Equals ("Joy")) {
+			return happyMaterial;
+		} else if (emotion.Equals ("Sadness")) {
+			return sadMaterial;
+		} else if (emotion.Equals ("Disgust")) {
+			return angryMaterial;
+		}
+		else {
+			return surpriseMaterial;
+		}
 	}
 
 	void GoWest(GoWestEvent eventTest) {
