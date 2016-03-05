@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Countdown : MonoBehaviour {
 
 	private double timer;
-	private float seconds = 20f;
+	private float seconds = 11f;
 	private bool timesUp = false;
 
 	public GUIText clock;
@@ -19,6 +20,7 @@ public class Countdown : MonoBehaviour {
 	void Update() {
 		if (timesUp) {
 			clock.text = string.Format ("GAME OVER");
+			SceneManager.LoadScene ("GameOver");
 			return;
 		}
 		if (seconds < 10)
@@ -37,9 +39,8 @@ public class Countdown : MonoBehaviour {
 		while (!timesUp) {
 			if (seconds < 10f) {
 				clock.color = Color.red;
-				clock.text = "";
 				yield return 0;
-				clock.text = seconds.ToString();
+				clock.color = Color.clear;
 				yield return 0;
 			}
 		}
