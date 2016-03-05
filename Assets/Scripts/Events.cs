@@ -17,7 +17,7 @@ public class GoWestEvent : GameEvent {
 public class GoNorthEvent : GameEvent {
 	public string emotion { get; private set; }
 
-	public GoNorthEvent(string someVar){
+	public GoNorthEvent(string emotion){
 		this.emotion = emotion;
 	}
 }

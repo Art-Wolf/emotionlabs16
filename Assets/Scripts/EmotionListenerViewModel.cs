@@ -152,7 +152,7 @@ public class EmotionListenerViewModel : ImageResultsListener {
 	}
 
 	public void OnNorthEmo(string emotion) {
-		Debug.Log("North Emo");
+		Debug.Log("North Emo: " + emotion);
 		EventController.Instance.Publish (new GoNorthEvent(emotion));
 	}
 

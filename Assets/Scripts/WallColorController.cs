@@ -87,13 +87,21 @@ public class WallColorController : MonoBehaviour
 		EventController.Instance.UnSubscribe<GoSouthEvent>(GoSouth);
 	}
 
+	Material getColor(string emotion) {
+		Debug.Log ("Emotion: " + emotion);
+		if (emotion.Equals("Joy")) return happyMaterial;
+		else if (emotion.Equals("Sadness")) return sadMaterial;
+		else if (emotion.Equals("Disgust")) return angryMaterial;
+		else return surpriseMaterial;
+	}
+
 	void GoWest(GoWestEvent eventTest) {
 		currentMat = 1;
 		foreach (GameObject top in wallTops) {
 			topRender = top.GetComponentsInChildren<Renderer>();
 			foreach (Renderer rend in topRender) 
 			{
-				rend.material.Lerp(rend.material, surpriseMaterial, 0.5f);
+				rend.material.Lerp(rend.material, getColor(eventTest.emotion), 0.5f);
 			}
 		}
 	}
@@ -104,7 +112,7 @@ public class WallColorController : MonoBehaviour
 			topRender = top.GetComponentsInChildren<Renderer>();
 			foreach (Renderer rend in topRender) 
 			{
-				rend.material.Lerp(rend.material, angryMaterial, 0.5f);
+				rend.material.Lerp(rend.material, getColor(eventTest.emotion), 0.5f);
 			}
 		}
 	}
@@ -115,7 +123,7 @@ public class WallColorController : MonoBehaviour
 			topRender = top.GetComponentsInChildren<Renderer>();
 			foreach (Renderer rend in topRender) 
 			{
-				rend.material.Lerp(rend.material, happyMaterial, 0.5f);
+				rend.material.Lerp(rend.material, getColor(eventTest.emotion), 0.5f);
 			}
 		}
 	}
@@ -126,7 +134,7 @@ public class WallColorController : MonoBehaviour
 			topRender = top.GetComponentsInChildren<Renderer>();
 			foreach (Renderer rend in topRender) 
 			{
-				rend.material.Lerp(rend.material, sadMaterial, 0.5f);
+				rend.material.Lerp(rend.material, getColor(eventTest.emotion), 0.5f);
 			}
 		}
 	}
