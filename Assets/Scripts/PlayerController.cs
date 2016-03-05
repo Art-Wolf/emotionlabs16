@@ -8,7 +8,39 @@ public class PlayerController : MonoBehaviour
 	public GUIText winText;
 	private int count;
 	private int numberOfGameObjects;
-	
+
+	void Awake()
+	{
+		EventController.Instance.Subscribe<GoWestEvent> (GoWest);
+		EventController.Instance.Subscribe<GoEastEvent> (GoEast);
+		EventController.Instance.Subscribe<GoNorthEvent> (GoNorth);
+		EventController.Instance.Subscribe<GoSouthEvent> (GoSouth);
+	}
+
+	void GoWest(GoWestEvent eventTest) {
+		Vector3 movement = new Vector3(-1.0f, 0.0f, 0.0f);
+
+		GetComponent<Rigidbody>().AddForce (movement * speed * Time.deltaTime);
+	}
+
+	void GoEast(GoEastEvent eventTest) {
+		Vector3 movement = new Vector3(1.0f, 0.0f, 0.0f);
+
+		GetComponent<Rigidbody>().AddForce (movement * speed * Time.deltaTime);
+	}
+
+	void GoNorth(GoNorthEvent eventTest) {
+		Vector3 movement = new Vector3(0.0f, 0.0f, 1.0f);
+
+		GetComponent<Rigidbody>().AddForce (movement * speed * Time.deltaTime);
+	}
+
+	void GoSouth(GoSouthEvent eventTest) {
+		Vector3 movement = new Vector3(0.0f, 0.0f, -1.0f);
+
+		GetComponent<Rigidbody>().AddForce (movement * speed * Time.deltaTime);
+	}
+
 	void Start()
 	{
 		count = 0;

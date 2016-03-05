@@ -23,18 +23,18 @@ public class EmotionListenerViewModel : ImageResultsListener {
 	public int[] nextNavArray = new int[4];
 	public int[] currNavArray = new int[4];
 
-	private enum emotionEnum {Joy, Sadness, Anger, Suprise};
-	Dictionary<string, float> emotionDict = new Dictionary<string, float>();
+	//private enum emotionEnum {Joy, Sadness, Anger, Suprise};
+	//Dictionary<string, float> emotionDict = new Dictionary<string, float>();
 
 	public EmotionListenerViewModel() {
 		//EventController.Instance.Subscribe ();
 		//subscribe to events in constructor or in awake functions
-		emotionDict.Add(emotionEnum.Joy, currentSmile);
-		emotionDict.Add(emotionEnum.Sadness, currentSadness);
-		emotionDict.Add(emotionEnum.Anger, currentAnger);
-		emotionDict.Add(emotionEnum.Suprise, currentSuprise);
+	//	emotionDict.Add(emotionEnum.Joy, currentSmile);
+	//	emotionDict.Add(emotionEnum.Sadness, currentSadness);
+	//	emotionDict.Add(emotionEnum.Anger, currentAnger);
+	//	emotionDict.Add(emotionEnum.Suprise, currentSuprise);
 
-		RandomizeEmotions();
+		//RandomizeEmotions();
 	}
 
 	public override void onFaceFound(float timestamp, int faceId) {
@@ -88,25 +88,25 @@ public class EmotionListenerViewModel : ImageResultsListener {
 			}
 
 			this.strongestEmo.text = "Custom Strongest Emotion: " + currStrongestEmoStr + "/" + currStrongestEmo;
-			strongestText.color = Color.green;
+			//strongestText.color = Color.green;
 			// invoke direction event
 			ctrlDelegate();
 
 		}
 	}
 
-	private void RandomizeEmotions() {
-		nextNavArray [0] = 0;
-		nextNavArray [1] = 1;
-		nextNavArray [2] = 2;
-		nextNavArray [3] = 3;
-		for(int i = 0; i < nextNavArray.Length; i++) {
-			string tmp = nextNavArray[i];
-			int r = Random.Range(i, nextNavArray.Length);
-			nextNavArray[i] = nextNavArray[r];
-			nextNavArray[r] = tmp;
-		}
-	}
+//	private void RandomizeEmotions() {
+//		nextNavArray [0] = 0;
+//		nextNavArray [1] = 1;
+//		nextNavArray [2] = 2;
+//		nextNavArray [3] = 3;
+//		for(int i = 0; i < nextNavArray.Length; i++) {
+//			string tmp = nextNavArray[i];
+//			int r = Random.Range(i, nextNavArray.Length);
+//			nextNavArray[i] = nextNavArray[r];
+//			nextNavArray[r] = tmp;
+//		}
+//	}
 
 	public void OnNorthEmo() {
 		Debug.Log("North Emo");
