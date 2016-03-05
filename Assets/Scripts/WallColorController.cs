@@ -77,6 +77,14 @@ public class WallColorController : MonoBehaviour
 		EventController.Instance.Subscribe<GoEastEvent> (GoEast);
 		EventController.Instance.Subscribe<GoNorthEvent> (GoNorth);
 		EventController.Instance.Subscribe<GoSouthEvent> (GoSouth);
+		EventController.Instance.Subscribe<GameOverEvent> (GameOver);
+	}
+
+	void GameOver(GameOverEvent eventTest) {
+		EventController.Instance.UnSubscribe<GoWestEvent>(GoWest);
+		EventController.Instance.UnSubscribe<GoEastEvent>(GoEast);
+		EventController.Instance.UnSubscribe<GoNorthEvent>(GoNorth);
+		EventController.Instance.UnSubscribe<GoSouthEvent>(GoSouth);
 	}
 
 	void GoWest(GoWestEvent eventTest) {
