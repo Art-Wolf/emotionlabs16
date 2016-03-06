@@ -47,9 +47,3 @@ sysinfo.txt
 # Unity3D generated meta files
 # ============ #
 *.pidb.meta
-
-# ============ #
-# Custom
-# ============ #
-/Assets/Resources/config.txt
-/Assets/Resources/config.txt.meta
