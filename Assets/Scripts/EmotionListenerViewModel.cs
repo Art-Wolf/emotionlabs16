@@ -12,6 +12,16 @@ public class EmotionListenerViewModel : ImageResultsListener {
 	public Text SouthEmoText;
 	public Text WestEmoText;
 
+	public Image NorthEmoImg;
+	public Image EastEmoImg;
+	public Image SouthEmoImg;
+	public Image WestEmoImg;
+
+	public Image NorthArrowImg;
+	public Image EastArrowImg;
+	public Image SouthArrowImg;
+	public Image WestArrowImg;
+
 	public Text ChangeEmoCountText;
 
 	public FeaturePoint[] featurePointsList;
@@ -32,10 +42,11 @@ public class EmotionListenerViewModel : ImageResultsListener {
 
 	public void Start() {
 		Debug.Log("Starting");
-		emotionDict.Add((int)emotionEnum.Joy, new EmoNav ("Joy", 0, "North"));
-		emotionDict.Add((int)emotionEnum.Sadness, new EmoNav ("Sadness", 0, "South"));
-		emotionDict.Add((int)emotionEnum.Disgust, new EmoNav ("Disgust", 0, "East"));
-		emotionDict.Add((int)emotionEnum.Suprise, new EmoNav ("Suprise", 0, "West"));
+
+		emotionDict.Add((int)emotionEnum.Joy, new EmoNav ("Joy", 0, "North", "Sprites/joyIcon", Color.green));
+		emotionDict.Add((int)emotionEnum.Sadness, new EmoNav ("Sadness", 0, "South", "Sprites/sadIcon", Color.blue));
+		emotionDict.Add((int)emotionEnum.Disgust, new EmoNav ("Disgust", 0, "East", "Sprites/disgustIcon", Color.red));
+		emotionDict.Add((int)emotionEnum.Suprise, new EmoNav ("Suprise", 0, "West", "Sprites/supriseIcon", Color.yellow));
 		//InvokeRepeating ("UpdateEmoNav", 0f, 15f);
 		InvokeRepeating ("UpdateEmoChangeCount", 0f, 1f);
 	}
@@ -52,19 +63,16 @@ public class EmotionListenerViewModel : ImageResultsListener {
 		Debug.Log("Got face results, faces: "+ faces.Count);
 
 		if(faces.Count > 0) {
-			strongestEmoNav = new EmoNav ("Nothing", 0, "Nowhere");
-
+			strongestEmoNav = new EmoNav ("Nothing", 0, "Nowhere", "Sprites/angryIcon", Color.gray);
 
 			faces[0].Emotions.TryGetValue (Emotions.Joy, out emotionDict [(int)emotionEnum.Joy].valence);
 			faces[0].Emotions.TryGetValue (Emotions.Sadness, out emotionDict [(int)emotionEnum.Sadness].valence);
 			faces[0].Emotions.TryGetValue (Emotions.Disgust, out emotionDict [(int)emotionEnum.Disgust].valence);
 			faces[0].Emotions.TryGetValue (Emotions.Surprise, out emotionDict [(int)emotionEnum.Suprise].valence);
 
-
 			if (emotionDict [(int)emotionEnum.Joy].valence > strongestEmoNav.valence) {
 				strongestEmoNav = emotionDict [(int)emotionEnum.Joy];
 			}
-
 			if (emotionDict[(int)emotionEnum.Disgust].valence > strongestEmoNav.valence) {
 				strongestEmoNav = emotionDict [(int)emotionEnum.Disgust];
 			}
@@ -85,6 +93,11 @@ public class EmotionListenerViewModel : ImageResultsListener {
 		EastEmoText.color = Color.black;
 		SouthEmoText.color = Color.black;
 		WestEmoText.color = Color.black;
+
+		NorthArrowImg.color = Color.gray;
+		EastArrowImg.color = Color.gray;
+		SouthArrowImg.color = Color.gray;
+		WestArrowImg.color = Color.gray;
 
 		switch(direction) {
 		case "North":
@@ -110,12 +123,12 @@ public class EmotionListenerViewModel : ImageResultsListener {
 
 	private void UpdateEmoChangeCount() {
 		if (emoChangeCount > 0) {
-			ChangeEmoCountText.text = "Change Emo In: " + emoChangeCount;
+			ChangeEmoCountText.text = "Emotions Change: " + emoChangeCount;
 			emoChangeCount--;
 		} else {
-			ChangeEmoCountText.text = "Change Emo In: " + emoChangeCount;
+			ChangeEmoCountText.text = "Emotions Change: " + emoChangeCount;
 			UpdateEmoNav ();
-			emoChangeCount = 15;
+			emoChangeCount = 10;
 		}
 	}
 
@@ -125,15 +138,23 @@ public class EmotionListenerViewModel : ImageResultsListener {
 
 		emotionDict [nextNavArray [0]].direction = "North";
 		NorthEmoText.text = emotionDict [nextNavArray [0]].name;
+		NorthEmoImg.sprite = Resources.Load<Sprite> (emotionDict [nextNavArray [0]].sprite);
+		NorthArrowImg.color = emotionDict [nextNavArray [0]].emoColor;
 
 		emotionDict [nextNavArray [1]].direction = "East";
 		EastEmoText.text  = emotionDict [nextNavArray [1]].name;
+		EastEmoImg.sprite = Resources.Load<Sprite> (emotionDict [nextNavArray [1]].sprite);
+		EastArrowImg.color = emotionDict [nextNavArray [1]].emoColor;
 
 		emotionDict [nextNavArray [2]].direction = "South";
 		SouthEmoText.text  = emotionDict [nextNavArray [2]].name;
+		SouthEmoImg.sprite = Resources.Load<Sprite> (emotionDict [nextNavArray [2]].sprite);
+		SouthArrowImg.color = emotionDict [nextNavArray [2]].emoColor;
 
 		emotionDict [nextNavArray [3]].direction = "West";
 		WestEmoText.text  = emotionDict [nextNavArray [3]].name;
+		WestEmoImg.sprite = Resources.Load<Sprite> (emotionDict [nextNavArray [3]].sprite);
+		WestArrowImg.color = emotionDict [nextNavArray [3]].emoColor;
 	}
 
 	private void RandomizeEmotions() {
@@ -152,7 +173,7 @@ public class EmotionListenerViewModel : ImageResultsListener {
 	}
 
 	public void OnNorthEmo(string emotion) {
-		Debug.Log("North Emo: " + emotion);
+		Debug.Log("North Emo");
 		EventController.Instance.Publish (new GoNorthEvent(emotion));
 	}
 
@@ -175,11 +196,15 @@ public class EmotionListenerViewModel : ImageResultsListener {
 		public string name;
 		public float valence;
 		public string direction;
+		public string sprite;
+		public Color emoColor;
 
-		public EmoNav(string name, float valence, string direction){
+		public EmoNav(string name, float valence, string direction, string sprite, Color emoColor){
 			this.name = name;
 			this.valence = valence;
 			this.direction = direction;
+			this.sprite = sprite;
+			this.emoColor = emoColor;
 		}
 	}
 
