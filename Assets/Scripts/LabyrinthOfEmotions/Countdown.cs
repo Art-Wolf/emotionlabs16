@@ -23,11 +23,7 @@ public class Countdown : MonoBehaviour {
 
 	void Update() {
 		if (timesUp) {
-			if (seconds > 10f || seconds > 70f) {
-				clock.text = "0" +  ((startingSeconds % 60f) - (seconds % 60f))+ ":" + (startingSeconds - seconds);
-			} else {
-				clock.text = "00:0" + seconds.ToString ();
-			}
+			
 			//clock.text = string.Format ("GAME OVER");
 			//SceneManager.LoadScene ("GameOver");
 			return;
@@ -43,11 +39,14 @@ public class Countdown : MonoBehaviour {
 			Time.timeScale = 0;
 			CancelInvoke ("CountdownTimer");
 		}
-		if (seconds > 10f || seconds > 70f) {
-			clock.text = "0" +  (seconds % 60f)+ ":" + seconds.ToString ();
-		} else {
-			clock.text = "00:0" + seconds.ToString ();
-		}
+		float minutesText = Mathf.Floor (seconds / 60);
+		float secondsText = seconds % 60;
+
+		if (secondsText > 59f)
+			secondsText = 59f;
+		
+		clock.text = "0" + minutesText + ":" +secondsText ;
+
 	}
 
 	private IEnumerator timeNearlyUpCoroutine(){
