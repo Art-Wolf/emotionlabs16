@@ -15,7 +15,7 @@ public class WinController : MonoBehaviour
 	void Start()
 	{
 		if (winObj == null) {
-			winObj = GameObject.FindGameObjectsWithTag ("win");
+			winObj = GameObject.FindGameObjectsWithTag ("ShowOnEnd");
 		}
 
 		//InvokeRepeating("changeWallColors", 1f, 1f);
@@ -25,8 +25,15 @@ public class WinController : MonoBehaviour
 	void OnCollisionEnter(Collision collisionInfo)
 	{
 		EventController.Instance.Publish (new GameOverEvent("random"));
+		showEnd ();
 		//winPanel.SetActive (true);
 		//winTimeText.text = "Time to complete: " + currentTimeText.text;
+	}
+
+	public void showEnd(){
+		foreach(GameObject g in winObj){
+			g.SetActive(true);
+		}
 	}
 
 }
