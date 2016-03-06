@@ -4,9 +4,9 @@ using System.Collections;
 public class PlayerController : MonoBehaviour 
 {	
 	public float speed;
-	public GUIText countText;
-	public GUIText winText;
-	private int count;
+	//public GUIText countText;
+	//public GUIText winText;
+	//private int count;
 	private int numberOfGameObjects;
 
 
@@ -52,9 +52,9 @@ public class PlayerController : MonoBehaviour
 
 	void Start()
 	{
-		count = 0;
-		SetCountText();
-		winText.text = "";
+		//count = 0;
+		//SetCountText();
+		//winText.text = "";
 		numberOfGameObjects = GameObject.FindGameObjectsWithTag("PickUp").Length;
 	}
 	
@@ -74,17 +74,17 @@ public class PlayerController : MonoBehaviour
 		{
 			GetComponent<Rigidbody> ().mass = 0.1f;
 			other.gameObject.SetActive(false);
-			count = count + 1;
-			SetCountText();
+			//count = count + 1;
+			//SetCountText();
 		} 
 	}
 	
-	void SetCountText ()
+	/*void SetCountText ()
 	{
 		countText.text = "Count: " + count.ToString();
 		if(count >= numberOfGameObjects)
 		{
 			winText.text = "YOU WIN!";
 		}
-	}
+	}*/
 }
