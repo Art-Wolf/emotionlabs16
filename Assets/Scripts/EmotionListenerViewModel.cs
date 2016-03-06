@@ -21,6 +21,7 @@ public class EmotionListenerViewModel : ImageResultsListener {
 	public Image EastArrowImg;
 	public Image SouthArrowImg;
 	public Image WestArrowImg;
+	public Image ShockImg;
 
 	public Text ChangeEmoCountText;
 
@@ -84,11 +85,11 @@ public class EmotionListenerViewModel : ImageResultsListener {
 			}
 
 			this.strongestEmo.text = "Custom Strongest Emotion: " + strongestEmoNav.name + "/" + strongestEmoNav.valence;
-			HighlightAndEvent (strongestEmoNav.direction, strongestEmoNav.name);
+			HighlightAndEvent (strongestEmoNav.direction, strongestEmoNav.name, strongestEmoNav.emoColor);
 		}
 	}
 
-	public void HighlightAndEvent(string direction, string emotion) {
+	public void HighlightAndEvent(string direction, string emotion, Color emoColor) {
 		NorthEmoText.color = Color.black;
 		EastEmoText.color = Color.black;
 		SouthEmoText.color = Color.black;
@@ -102,18 +103,22 @@ public class EmotionListenerViewModel : ImageResultsListener {
 		switch(direction) {
 		case "North":
 			NorthEmoText.color = Color.green;
+			NorthArrowImg.color = emoColor;
 			OnNorthEmo(emotion);
 			break;
 		case "East":
 			EastEmoText.color = Color.green;
+			EastArrowImg.color = emoColor;
 			OnEastEmo(emotion);
 			break;
 		case "South":
 			SouthEmoText.color = Color.green;
+			SouthArrowImg.color = emoColor;
 			OnSouthEmo(emotion);
 			break;
 		case "West":
 			WestEmoText.color = Color.green;
+			WestArrowImg.color = emoColor;
 			OnWestEmo(emotion);
 			break;
 		default:
@@ -157,6 +162,17 @@ public class EmotionListenerViewModel : ImageResultsListener {
 		WestArrowImg.color = emotionDict [nextNavArray [3]].emoColor;
 	}
 
+	private void OnShock() {
+		ShockImg.sprite = Resources.Load<Sprite> ("Sprites/shockIcon");
+		ShockImg.color = Color.white;
+		Invoke ("OnShockFinish", 2f);
+	}
+
+	private void OnShockFinish() {
+		ShockImg.sprite = Resources.Load<Sprite> ("Sprites/circleWhite");
+		ShockImg.color = Color.gray;
+	}
+
 	private void RandomizeEmotions() {
 		nextNavArray [0] = 0;
 		nextNavArray [1] = 1;
@@ -175,6 +191,7 @@ public class EmotionListenerViewModel : ImageResultsListener {
 	public void OnNorthEmo(string emotion) {
 		Debug.Log("North Emo");
 		EventController.Instance.Publish (new GoNorthEvent(emotion));
+		OnShock();
 	}
 
 	public void OnWestEmo(string emotion) {
