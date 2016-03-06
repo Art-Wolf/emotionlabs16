@@ -106,7 +106,7 @@ public class WallColorController : MonoBehaviour
 				audio.clip = sadAudio;
 			} else if (emotion.Equals ("Disgust")) {
 				audio.clip = angryAudio;
-			} else if (emotion.Equals ("Surprise")) {
+			} else if (emotion.Equals ("Suprise")) {
 				audio.clip = surpriseAudio;
 			} else if (emotion.Equals ("GameOver")) {
 				audio.clip = applauseAudio;
