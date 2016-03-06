@@ -25,8 +25,8 @@ public class WinController : MonoBehaviour
 	void OnCollisionEnter(Collision collisionInfo)
 	{
 		EventController.Instance.Publish (new GameOverEvent("random"));
-		winPanel.SetActive (true);
-		winTimeText.text = "Time to complete: " + currentTimeText.text;
+		//winPanel.SetActive (true);
+		//winTimeText.text = "Time to complete: " + currentTimeText.text;
 	}
 
 }

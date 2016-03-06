@@ -9,11 +9,14 @@ public class Countdown : MonoBehaviour {
 	private float startingSeconds = 120f;
 	private float seconds = 120f;
 	private bool timesUp = false;
+	GameObject[] endObjects;
 
 	public Text clock;
 
 	public void Start () {
 		//clock.text = seconds.ToString();
+		endObjects = GameObject.FindGameObjectsWithTag("ShowOnEnd");
+		hideEnd();
 		InvokeRepeating ("CountdownTimer", 1.0f, 1.0f); 
 		//StartCoroutine (timeNearlyUpCoroutine ());
 	}
@@ -25,7 +28,6 @@ public class Countdown : MonoBehaviour {
 			} else {
 				clock.text = "00:0" + seconds.ToString ();
 			}
-
 			//clock.text = string.Format ("GAME OVER");
 			//SceneManager.LoadScene ("GameOver");
 			return;
@@ -37,6 +39,8 @@ public class Countdown : MonoBehaviour {
 	public void CountdownTimer () {
 		if (--seconds == 0) {
 			timesUp = true;
+			showEnd();
+			Time.timeScale = 0;
 			CancelInvoke ("CountdownTimer");
 		}
 		if (seconds > 10f || seconds > 70f) {
@@ -54,6 +58,18 @@ public class Countdown : MonoBehaviour {
 				clock.color = Color.clear;
 				yield return 0;
 			}
+		}
+	}
+
+	public void hideEnd(){
+		foreach(GameObject g in endObjects){
+			g.SetActive(false);
+		}
+	}
+
+	public void showEnd(){
+		foreach(GameObject g in endObjects){
+			g.SetActive(true);
 		}
 	}
 		
