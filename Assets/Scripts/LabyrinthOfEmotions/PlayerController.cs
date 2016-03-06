@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 	//public GUIText winText;
 	//private int count;
 	private int numberOfGameObjects;
+	public AudioClip buzzAudio;
 
 
 	void Awake()
@@ -70,13 +71,33 @@ public class PlayerController : MonoBehaviour
 	
 	void OnTriggerEnter(Collider other) 
 	{
-		if(other.gameObject.tag == "PickUp")
+		if(other.gameObject.tag == "PickUpGood")
 		{
-			GetComponent<Rigidbody> ().mass = 0.1f;
+			GetComponent<Rigidbody> ().mass = 0.3f;
 			other.gameObject.SetActive(false);
 			//count = count + 1;
 			//SetCountText();
 		} 
+		if (other.gameObject.tag == "PickUpBad") {
+			//Debug.Log("Detected collision between " + gameObject.name + " and " + collisionInfo.collider.name);
+
+			TextAsset zapperConfig = Resources.Load("config") as TextAsset;
+			string url = zapperConfig.text;
+			WWWForm form = new WWWForm ();
+			form.AddField ("fake", "xy");
+
+			WWW www = new WWW (url, form);
+			EventController.Instance.Publish (new ZappedEvent());
+
+			if (www.error == null) {
+				AudioSource audio = other.gameObject.GetComponent<AudioSource>();
+				audio.clip = buzzAudio;
+				audio.Play ();
+			} else {
+				Debug.Log("IFTTT error: " + www.error);
+			}
+		
+		}
 	}
 	
 	/*void SetCountText ()

@@ -9,7 +9,7 @@ public class DelayedSceneChange : MonoBehaviour {
 	}
 
 	IEnumerator ChangeLevel() {
-		yield return new WaitForSeconds (20);
+		yield return new WaitForSeconds (19);
 		Application.LoadLevel(2);
 	}
 	
