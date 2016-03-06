@@ -185,7 +185,7 @@ public class EmotionListenerViewModel : ImageResultsListener {
 			nextNavArray[r] = tmp;
 		}
 
-		Debug.Log(nextNavArray [0] + "/" + nextNavArray [1] + "/" + nextNavArray [2] + "/" + nextNavArray [3]);
+		Debug.Log(emotionDict [nextNavArray [0]].name + "/" + emotionDict [nextNavArray [1]].name + "/" + emotionDict [nextNavArray [2]].name + "/" + emotionDict [nextNavArray [3]].name);
 	}
 
 	public void OnNorthEmo(string emotion) {

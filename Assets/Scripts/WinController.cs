@@ -5,7 +5,10 @@ using System.Collections.Generic;
 
 public class WinController : MonoBehaviour 
 {
-	public GUIText winText;
+	public GameObject winPanel;
+
+	public Text currentTimeText;
+	public Text winTimeText;
 
 	GameObject [] winObj;
 
@@ -21,11 +24,9 @@ public class WinController : MonoBehaviour
 
 	void OnCollisionEnter(Collision collisionInfo)
 	{
-		Debug.Log("Detected collision between " + gameObject.name + " and " + collisionInfo.collider.name);
 		EventController.Instance.Publish (new GameOverEvent("random"));
-		winText.text = "YOU WIN!";
-		foreach (GameObject win in winObj) 
-			Destroy (win);
+		winPanel.SetActive (true);
+		winTimeText.text = "Time to complete: " + currentTimeText.text;
 	}
 
 }
