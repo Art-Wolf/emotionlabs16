@@ -45,3 +45,9 @@ public class GameOverEvent : GameEvent {
 		this.someVar = someVar;
 	}
 }
+
+public class ZappedEvent : GameEvent {
+
+	public ZappedEvent(){
+	}
+}
