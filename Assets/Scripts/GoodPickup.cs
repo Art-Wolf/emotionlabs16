@@ -15,6 +15,7 @@ public class GoodPickup : MonoBehaviour
 
 	void OnCollisionEnter(Collision collisionInfo)
 	{
+		Debug.Log ("Got good pickup collision");
 		foreach (GameObject player in players) {
 			Rigidbody rb = player.GetComponent<Rigidbody> ();
 			rb.mass = 0.1f;
