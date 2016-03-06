@@ -100,6 +100,8 @@ public class WallColorController : MonoBehaviour
 	void setMusic(string emotion) {
 		if (!currentEmotion.Equals(emotion)) {
 			AudioSource audio = GetComponent<AudioSource>();
+			audio.Stop();
+
 			if (emotion.Equals ("Joy")) {
 				audio.clip = happyAudio;
 			} else if (emotion.Equals ("Sadness")) {
