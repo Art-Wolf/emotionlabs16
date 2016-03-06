@@ -5,8 +5,6 @@ using System.Collections.Generic;
 // temp test: code from http://www.willrmiller.com/?p=87
 // to be changed... 
 
-// TODO: change singelton interface to be thread safe like audioController
-// TODO: perhaps rename to EventManager or something else, this class is perhaps not really a controller
 // SideNote: singleton implemented as per http://csharpindepth.com/Articles/General/Singleton.aspx#nested-cctor
 public class EventController {
 	private static readonly EventController instance = new EventController();
@@ -29,8 +27,6 @@ public class EventController {
 	private Dictionary<System.Type, EventDelegate> delegates = new Dictionary<System.Type, EventDelegate>();
 	private Dictionary<System.Delegate, EventDelegate> delegateLookup = new Dictionary<System.Delegate, EventDelegate>();
 
-	// TODO: Although AddListener is probably a more technically correct description of what is happening to note the event here,
-	// I feel subscribe/unsubscribe/publish gives a better conceptual of how to use these methods when call the eventcontroller
 	public void Subscribe<T> (EventDelegate<T> del) where T : GameEvent {	
 		// Early-out if we've already registered this delegate
 		if (delegateLookup.ContainsKey(del))
@@ -49,8 +45,6 @@ public class EventController {
 		}
 	}
 
-	// TODO: Although RemoveListener is probably a more technically correct description of what is happening to note the event here,
-	// I feel subscribe/unsubscribe/publish gives a better conceptual of how to use these methods when call the eventcontroller
 	public void UnSubscribe<T> (EventDelegate<T> del) where T : GameEvent {
 		EventDelegate internalDelegate;
 		if (delegateLookup.TryGetValue(del, out internalDelegate)) {
@@ -74,8 +68,6 @@ public class EventController {
 		// for remove all method etc !!
 	}
 
-	// TODO: Although Raise is probably a more technically correct description of what is happening invoke the event
-	// I feel subscribe/unsubscribe/publish gives a better conceptual of how to use these methods when call the eventcontroller
 	public void Publish (GameEvent e) {
 		EventDelegate del;
 		if (delegates.TryGetValue(e.GetType(), out del)) {
