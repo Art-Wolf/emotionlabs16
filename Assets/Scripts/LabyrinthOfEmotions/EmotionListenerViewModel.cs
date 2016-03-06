@@ -194,22 +194,22 @@ public class EmotionListenerViewModel : ImageResultsListener {
 	}
 
 	public void OnNorthEmo(string emotion) {
-		//Debug.Log("North Emo");
+		Debug.Log("North Emo");
 		EventController.Instance.Publish (new GoNorthEvent(emotion));
 	}
 
 	public void OnWestEmo(string emotion) {
-		//Debug.Log("West Emo");
+		Debug.Log("West Emo");
 		EventController.Instance.Publish (new GoWestEvent(emotion));
 	}
 
 	public void OnEastEmo(string emotion) {
-		//Debug.Log("East Emo");
+		Debug.Log("East Emo");
 		EventController.Instance.Publish (new GoEastEvent(emotion));
 	}
 
 	public void OnSouthEmo(string emotion) {
-		//Debug.Log("South Emo");
+		Debug.Log("South Emo");
 		EventController.Instance.Publish (new GoSouthEvent(emotion));
 	}
 
