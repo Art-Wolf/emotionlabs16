@@ -43,6 +43,7 @@ public class EmotionListenerViewModel : ImageResultsListener {
 
 	public void Start() {
 		Debug.Log("Starting");
+		EventController.Instance.Subscribe<ZappedEvent> (OnShockedEvent);
 
 		emotionDict.Add((int)emotionEnum.Joy, new EmoNav ("Joy", 0, "North", "Sprites/joyIcon", Color.green));
 		emotionDict.Add((int)emotionEnum.Sadness, new EmoNav ("Sadness", 0, "South", "Sprites/sadIcon", Color.blue));
@@ -133,7 +134,7 @@ public class EmotionListenerViewModel : ImageResultsListener {
 		} else {
 			ChangeEmoCountText.text = "Emotions Change: " + emoChangeCount;
 			UpdateEmoNav ();
-			emoChangeCount = 10;
+			emoChangeCount = 20;
 		}
 	}
 
@@ -160,6 +161,10 @@ public class EmotionListenerViewModel : ImageResultsListener {
 		WestEmoText.text  = emotionDict [nextNavArray [3]].name;
 		WestEmoImg.sprite = Resources.Load<Sprite> (emotionDict [nextNavArray [3]].sprite);
 		WestArrowImg.color = emotionDict [nextNavArray [3]].emoColor;
+	}
+
+	public void OnShockedEvent(ZappedEvent evnt) {
+		OnShock ();
 	}
 
 	private void OnShock() {
@@ -191,7 +196,6 @@ public class EmotionListenerViewModel : ImageResultsListener {
 	public void OnNorthEmo(string emotion) {
 		Debug.Log("North Emo");
 		EventController.Instance.Publish (new GoNorthEvent(emotion));
-		OnShock();
 	}
 
 	public void OnWestEmo(string emotion) {

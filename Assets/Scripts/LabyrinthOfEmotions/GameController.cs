@@ -36,6 +36,11 @@ public class GameController : MonoBehaviour
 		Application.LoadLevel(Application.loadedLevel);
 	}
 
+	// Quits the game
+	public void QuitGame() {
+		Application.Quit ();
+	}
+
 	//controls the pausing of the scene
 	public void pauseControl(){
 		if(Time.timeScale == 1)

@@ -17,13 +17,7 @@ public class Zapper : MonoBehaviour {
 		form.AddField ("fake", "xy");
 
 		WWW www = new WWW (url, form);
-
-		StartCoroutine (WaitForRequest (www));
-	}
-		
-	IEnumerator WaitForRequest(WWW www)
-	{
-		yield return www;
+		EventController.Instance.Publish (new ZappedEvent());
 
 		if (www.error == null) {
 			AudioSource audio = GetComponent<AudioSource>();
