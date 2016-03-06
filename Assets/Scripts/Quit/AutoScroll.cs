@@ -11,20 +11,17 @@ public class AutoScroll : MonoBehaviour {
 		Setup ();
 	}
 
+
 	void Setup() {
 		isScrolling = true;
 		rotation = gameObject.GetComponentInParent<Transform> ().eulerAngles.x;
 		//Debug.Log ("Parent rotation: " + rotation);
 	}
 
+
+
 	// Update is called once per frame
 	void Update () {	
-
-		// Check if the user wants to quit the application
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			Application.Quit();
-		}
 
 		// If we are scrolling, perform update action
 		if (isScrolling)

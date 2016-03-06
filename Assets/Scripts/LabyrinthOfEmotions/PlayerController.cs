@@ -81,6 +81,8 @@ public class PlayerController : MonoBehaviour
 		if (other.gameObject.tag == "PickUpBad") {
 			//Debug.Log("Detected collision between " + gameObject.name + " and " + collisionInfo.collider.name);
 
+			other.gameObject.SetActive(false);
+
 			TextAsset zapperConfig = Resources.Load("config") as TextAsset;
 			string url = zapperConfig.text;
 			WWWForm form = new WWWForm ();
@@ -91,7 +93,6 @@ public class PlayerController : MonoBehaviour
 
 			if (www.error == null) {
 				AudioSource audio = other.gameObject.GetComponent<AudioSource>();
-				audio.clip = buzzAudio;
 				audio.Play ();
 			} else {
 				Debug.Log("IFTTT error: " + www.error);
