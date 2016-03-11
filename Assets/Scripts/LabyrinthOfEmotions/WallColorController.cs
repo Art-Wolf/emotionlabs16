@@ -30,11 +30,19 @@ public class WallColorController : MonoBehaviour
 
 	void Start()
 	{
+		Debug.Log ("WallColorController: Start");
 		if (wallTops == null) {
 			wallTops = GameObject.FindGameObjectsWithTag ("top");
 		}
 
 		//InvokeRepeating("changeWallColors", 1f, 1f);
+	}
+
+	void OnLevelWasLoaded(int level) {
+		Debug.Log ("WallColorController: OnLevelWasLoaded");
+		if (wallTops == null) {
+			wallTops = GameObject.FindGameObjectsWithTag ("top");
+		}
 	}
 
 	/** Don't call.. **/
@@ -90,10 +98,10 @@ public class WallColorController : MonoBehaviour
 	}
 
 	void GameOver(GameOverEvent eventTest) {
-		EventController.Instance.UnSubscribe<GoWestEvent>(GoWest);
+		/*EventController.Instance.UnSubscribe<GoWestEvent>(GoWest);
 		EventController.Instance.UnSubscribe<GoEastEvent>(GoEast);
 		EventController.Instance.UnSubscribe<GoNorthEvent>(GoNorth);
-		EventController.Instance.UnSubscribe<GoSouthEvent>(GoSouth);
+		EventController.Instance.UnSubscribe<GoSouthEvent>(GoSouth);*/
 		setMusic ("GameOver");
 	}
 

@@ -6,16 +6,17 @@ using System.Collections;
 public class Countdown : MonoBehaviour {
 
 	private double timer;
-	private float startingSeconds = 120f;
-	private float seconds = 120f;
+	private float startingSeconds = 5f;
+	private float seconds = 5f;
 	private bool timesUp = false;
-	GameObject[] endObjects;
+	//GameObject[] endObjects;
+	public GameObject winPanel;
 
 	public Text clock;
 
 	public void Start () {
 		//clock.text = seconds.ToString();
-		endObjects = GameObject.FindGameObjectsWithTag("ShowOnEnd");
+		//endObjects = GameObject.FindGameObjectsWithTag("ShowOnEnd");
 		hideEnd();
 		InvokeRepeating ("CountdownTimer", 1.0f, 1.0f); 
 		//StartCoroutine (timeNearlyUpCoroutine ());
@@ -61,15 +62,19 @@ public class Countdown : MonoBehaviour {
 	}
 
 	public void hideEnd(){
-		foreach(GameObject g in endObjects){
+		/*foreach(GameObject g in endObjects){
 			g.SetActive(false);
-		}
+		}*/
+		winPanel.SetActive(false);
+		winPanel.transform.SetAsFirstSibling ();
 	}
 
 	public void showEnd(){
-		foreach(GameObject g in endObjects){
+		/*foreach(GameObject g in endObjects){
 			g.SetActive(true);
-		}
+		}*/
+		winPanel.SetActive(true);
+		winPanel.transform.SetAsLastSibling ();
 	}
 		
 }

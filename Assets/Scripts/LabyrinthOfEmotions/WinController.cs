@@ -21,9 +21,16 @@ public class WinController : MonoBehaviour
 		//InvokeRepeating("changeWallColors", 1f, 1f);
 	}
 
+	void OnTriggerEnter() {
+		Debug.Log ("OnTrigger");
+		EventController.Instance.Publish (new GameOverEvent("random"));
+		showEnd ();
+	}
+
 
 	void OnCollisionEnter(Collision collisionInfo)
 	{
+		Debug.Log ("OnCollision");
 		EventController.Instance.Publish (new GameOverEvent("random"));
 		showEnd ();
 		//winPanel.SetActive (true);
@@ -31,9 +38,12 @@ public class WinController : MonoBehaviour
 	}
 
 	public void showEnd(){
-		foreach(GameObject g in winObj){
+		/*foreach(GameObject g in winObj){
 			g.SetActive(true);
-		}
+		}*/
+
+		winPanel.SetActive(true);
+		winPanel.transform.SetAsLastSibling ();
 	}
 
 }

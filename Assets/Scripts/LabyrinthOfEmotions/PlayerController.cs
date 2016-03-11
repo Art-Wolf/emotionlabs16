@@ -21,10 +21,10 @@ public class PlayerController : MonoBehaviour
 	}
 
 	void GameOver(GameOverEvent eventTest) {
-		EventController.Instance.UnSubscribe<GoWestEvent>(GoWest);
+		/*EventController.Instance.UnSubscribe<GoWestEvent>(GoWest);
 		EventController.Instance.UnSubscribe<GoEastEvent>(GoEast);
 		EventController.Instance.UnSubscribe<GoNorthEvent>(GoNorth);
-		EventController.Instance.UnSubscribe<GoSouthEvent>(GoSouth);
+		EventController.Instance.UnSubscribe<GoSouthEvent>(GoSouth);*/
 	}
 
 	void GoWest(GoWestEvent eventTest) {
@@ -57,6 +57,12 @@ public class PlayerController : MonoBehaviour
 		//SetCountText();
 		//winText.text = "";
 		numberOfGameObjects = GameObject.FindGameObjectsWithTag("PickUp").Length;
+	}
+
+	void OnLevelWasLoaded() {
+		if (numberOfGameObjects == null) {
+			numberOfGameObjects = GameObject.FindGameObjectsWithTag("PickUp").Length;
+		}
 	}
 	
 	void FixedUpdate ()
