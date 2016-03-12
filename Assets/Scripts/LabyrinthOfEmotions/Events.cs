@@ -51,3 +51,4 @@ public class ZappedEvent : GameEvent {
 	public ZappedEvent(){
 	}
 }
+

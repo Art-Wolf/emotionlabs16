@@ -144,10 +144,11 @@ public class WallColorController : MonoBehaviour
 	void GoWest(GoWestEvent eventTest) {
 		currentMat = 1;
 		foreach (GameObject top in wallTops) {
-			topRender = top.GetComponentsInChildren<Renderer>();
-			foreach (Renderer rend in topRender) 
-			{
-				rend.material.Lerp(rend.material, getColor(eventTest.emotion), 0.5f);
+			if (top != null) {
+				topRender = top.GetComponentsInChildren<Renderer> ();
+				foreach (Renderer rend in topRender) {
+					rend.material.Lerp (rend.material, getColor (eventTest.emotion), 0.5f);
+				}
 			}
 		}
 	}
@@ -155,10 +156,11 @@ public class WallColorController : MonoBehaviour
 	void GoEast(GoEastEvent eventTest) {
 		currentMat = 2;
 		foreach (GameObject top in wallTops) {
-			topRender = top.GetComponentsInChildren<Renderer>();
-			foreach (Renderer rend in topRender) 
-			{
-				rend.material.Lerp(rend.material, getColor(eventTest.emotion), 0.5f);
+			if (top != null) {
+				topRender = top.GetComponentsInChildren<Renderer> ();
+				foreach (Renderer rend in topRender) {
+					rend.material.Lerp (rend.material, getColor (eventTest.emotion), 0.5f);
+				}
 			}
 		}
 	}
@@ -166,10 +168,11 @@ public class WallColorController : MonoBehaviour
 	void GoNorth(GoNorthEvent eventTest) {
 		currentMat = 3;
 		foreach (GameObject top in wallTops) {
-			topRender = top.GetComponentsInChildren<Renderer>();
-			foreach (Renderer rend in topRender) 
-			{
-				rend.material.Lerp(rend.material, getColor(eventTest.emotion), 0.5f);
+			if (top != null) {
+				topRender = top.GetComponentsInChildren<Renderer> ();
+				foreach (Renderer rend in topRender) {
+					rend.material.Lerp (rend.material, getColor (eventTest.emotion), 0.5f);
+				}
 			}
 		}
 	}
@@ -177,10 +180,11 @@ public class WallColorController : MonoBehaviour
 	void GoSouth(GoSouthEvent eventTest) {
 		currentMat = 4;
 		foreach (GameObject top in wallTops) {
-			topRender = top.GetComponentsInChildren<Renderer>();
-			foreach (Renderer rend in topRender) 
-			{
-				rend.material.Lerp(rend.material, getColor(eventTest.emotion), 0.5f);
+			if (top != null) {
+				topRender = top.GetComponentsInChildren<Renderer> ();
+				foreach (Renderer rend in topRender) {
+					rend.material.Lerp (rend.material, getColor (eventTest.emotion), 0.5f);
+				}
 			}
 		}
 	}

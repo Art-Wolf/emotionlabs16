@@ -6,11 +6,12 @@ using System.Collections;
 public class Countdown : MonoBehaviour {
 
 	private double timer;
-	private float startingSeconds = 5f;
-	private float seconds = 5f;
+	private float startingSeconds = 120f;
+	private float seconds = 120f;
 	private bool timesUp = false;
 	//GameObject[] endObjects;
 	public GameObject winPanel;
+	public Text winPanelText;
 
 	public Text clock;
 
@@ -73,6 +74,7 @@ public class Countdown : MonoBehaviour {
 		/*foreach(GameObject g in endObjects){
 			g.SetActive(true);
 		}*/
+		winPanelText.text = "Failed :(";
 		winPanel.SetActive(true);
 		winPanel.transform.SetAsLastSibling ();
 	}

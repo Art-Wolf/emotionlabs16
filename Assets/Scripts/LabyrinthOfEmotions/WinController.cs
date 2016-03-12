@@ -6,14 +6,13 @@ using System.Collections.Generic;
 public class WinController : MonoBehaviour 
 {
 	public GameObject winPanel;
-
+	public Text winPanelText;
 	public Text currentTimeText;
 	public Text winTimeText;
 
 	GameObject [] winObj;
 
-	void Start()
-	{
+	void Start() {
 		if (winObj == null) {
 			winObj = GameObject.FindGameObjectsWithTag ("ShowOnEnd");
 		}
@@ -41,7 +40,7 @@ public class WinController : MonoBehaviour
 		/*foreach(GameObject g in winObj){
 			g.SetActive(true);
 		}*/
-
+		winPanelText.text = "You Win!!";
 		winPanel.SetActive(true);
 		winPanel.transform.SetAsLastSibling ();
 	}
